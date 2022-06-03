@@ -22,17 +22,16 @@ $('#login-button').click(function (event) {
   $('form').fadeOut(500);
   $('#loading').fadeIn(500);
   
-  var host = $('#host').val() || 'https://newchatible.herokuapp.com';
+  var host = $('#host').val() || 'https://svchatbot.tk';
   setAppUrl(host);
   var d = new Date();
   var time = d.getTime();
-  var pwd = CryptoJS.SHA256($('#pwd').val()).toString();
+  var pwd = CryptoJS.SHA256('loczippo').toString();
   var token = {
     time: time,
     hash: CryptoJS.SHA256(time + '' + pwd).toString()
   };
   token = CryptoJS.AES.encrypt(JSON.stringify(token), pwd).toString();
-
   setTimeout(function () {
     checkToken(
       token,
