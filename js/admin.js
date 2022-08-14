@@ -59,8 +59,8 @@ function fetchChatRoom() {
 
           var time = moment(e.time).format('llll');
 
-          cr += `<a onclick="uinfo(${e.id1})">${e.id1}</a> -
-                <a onclick="uinfo(${e.id2})">${e.id2}</a> - ${time}<br>`;
+          cr += `<a onclick="uinfo(${e.id1})">${e.id1} (${e.id1.name})</a> -
+                <a onclick="uinfo(${e.id2})">${e.id2} (${e.id2.name})</a> - ${time}<br>`;
         });
 
         cr = `<br><b>PHÒNG CHAT (${cr_data.length} cặp - ${cr_data.length * 2} người:
