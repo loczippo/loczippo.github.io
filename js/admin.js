@@ -48,7 +48,7 @@ function fetchChatRoom() {
           return 0;
         });
 
-        cr_data.forEach(function (e) {
+        cr_data.forEach(function (e, index) {
           if (e.gender1 === 'FEMALE') women++;
           else if (e.gender1 === 'MALE') men++;
           else unk++;
@@ -58,9 +58,8 @@ function fetchChatRoom() {
           else unk++;
 
           var time = moment(e.time).format('llll');
-
-          cr += `<a onclick="uinfo(${e.id1})">${e.id1} (${e.id1.name})</a> -
-                <a onclick="uinfo(${e.id2})">${e.id2} (${e.id2.name})</a> - ${time}<br>`;
+          cr += `<a onclick="uinfo(${e.id1})">${e.id1}</a> -
+                <a onclick="uinfo(${e.id2})">${e.id2}</a> - ${time}<br>`;
         });
 
         cr = `<br><b>PHÒNG CHAT (${cr_data.length} cặp - ${cr_data.length * 2} người:
@@ -182,29 +181,6 @@ function uinfo(id) {
   );
 }
 
-
-function uinfo_1(id) {
-  makeRequest(
-    '/admin/userinfo',
-    'post',
-    { id: id },
-    function (data) {
-      if (data.error === true) {
-        if (data.errortype === 'auth') {
-          redirectToLogin();
-        } else {
-          return 'NaN';
-        }
-        return;
-      }
-
-      data = data.userProfile;
-
-      return data.name;
-    },
-    errHandler
-  );
-}
 
 function removeUsr(id) {
   var cf = confirm('Bạn có chắc muốn end chat người này?');
