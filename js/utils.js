@@ -129,8 +129,6 @@ function sendMessage() {
       listIDArray.push(newArr[j].trim());
     }
   }
-  console.log(listIDArray)
-  return;
   for (let i = 0; i < listIDArray.length; i++) {
     makeRequest(
       '/admin/userinfo',
