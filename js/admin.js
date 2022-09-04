@@ -165,7 +165,7 @@ function uinfo(id) {
         if (data.errortype === 'auth') {
           redirectToLogin();
         } else {
-          $('#ptnkinfo').html(`<b>ID: ${id}</b><br>Couldn't get info for user ${id}<br>
+          $('#userinfo').html(`<b>ID: ${id}</b><br>Couldn't get info for user ${id}<br>
                               <button class="btn btn-danger" onclick="removeUsr(${id})">End chat</button>`);
         }
         return;
@@ -173,7 +173,7 @@ function uinfo(id) {
 
       data = data.userProfile;
 
-      $('#ptnkinfo').html(`<b>ID: ${id}</b><br>${data.name} (<i>${data.gender == 'male' ? 'Nam' : 'Nữ'}</i>)<br>
+      $('#userinfo').html(`<b>ID: ${id}</b><br>${data.name} (<i>${data.gender == 'male' ? 'Nam' : 'Nữ'}</i>)<br>
           <img src="${data.profile_pic}" width="100px"/><br>
           <button class="btn btn-danger" onclick="removeUsr(${id})">End chat</button>`);
     },
@@ -191,7 +191,7 @@ function removeUsr(id) {
       { id: id, type: 'remove' },
       function (res) {
         if (res.status === true) {
-          $('#ptnkinfo').html('Ended chat for ID ' + id);
+          $('#userinfo').html('Ended chat for ID ' + id);
           fetchData();
         }
       },

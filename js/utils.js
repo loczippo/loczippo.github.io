@@ -116,6 +116,31 @@ function resetDatabase() {
   }
 }
 
+function sendMessage() {
+  var arr = $('#userid').val().split('\n');
+  var content = $('#content').val();
+
+  var listIDArray = [];
+  //handler array
+  for (let i = 0; i < arr.length; i++) {
+    let newArr = arr[i].split('-');
+    newArr.pop();
+    for(let j = 0; j < newArr.length; j++) {
+      listIDArray.push(newArr[j].trim())
+    }
+  }
+  for (let i = 0; i < listIDArray.length; i++) {
+    makeRequest('/admin/sendmessage', 'post', { id: listIDArray[i], content: content }, function (data) {
+      if (data.error === true) {
+      }
+    });
+  }
+  $('#status').html('Đã gửi');
+  setTimeout(function () {
+    $('#status').html('');
+  }, 5000);
+}
+
 function checkInfo() {
   var id = $('#id').val();
   makeRequest(
@@ -127,18 +152,18 @@ function checkInfo() {
         if (data.errortype === 'auth') {
           redirectToLogin();
         } else {
-          $('#ptnkinfo').html(`Couldn't get info for user ${id}`);
+          $('#userinfo').html(`Couldn't get info for user ${id}`);
         }
         return;
       }
 
       data = data.userProfile;
 
-      $('#ptnkinfo').html(`<b>ID: ${id}</><br>${data.name} (<i>${data.gender == 'male' ? 'Nam' : 'Nữ'}</i>)<br>
+      $('#userinfo').html(`<b>ID: ${id}</><br>${data.name} (<i>${data.gender == 'male' ? 'Nam' : 'Nữ'}</i>)<br>
                           <img src="${data.profile_pic}" width="100px"/><br>`);
     },
     function (xhr, ajaxOptions, thrownError) {
-      $('#ptnkinfo').text(thrownError);
+      $('#userinfo').text(thrownError);
     }
   );
 }
