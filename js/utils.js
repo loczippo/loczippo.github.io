@@ -125,15 +125,37 @@ function sendMessage() {
   for (let i = 0; i < arr.length; i++) {
     let newArr = arr[i].split('-');
     newArr.pop();
-    for(let j = 0; j < newArr.length; j++) {
-      listIDArray.push(newArr[j].trim())
+    for (let j = 0; j < newArr.length; j++) {
+      listIDArray.push(newArr[j].trim());
     }
   }
   for (let i = 0; i < listIDArray.length; i++) {
-    makeRequest('/admin/sendmessage', 'post', { id: listIDArray[i], content: content }, function (data) {
-      if (data.error === true) {
+    makeRequest(
+      '/admin/userinfo',
+      'post',
+      { id: id },
+      function (data) {
+        if (data.error === true) {
+          if (data.errortype === 'auth') {
+            redirectToLogin();
+          } else {
+            $('#userinfo').html(`Couldn't get info for user ${id}`);
+          }
+          return;
+        }
+
+        data = data.userProfile;
+        content.replace('@name', data.name);
+        makeRequest('/admin/sendmessage', 'post', { id: listIDArray[i], content: content }, function (data) {
+          if (data.error === true) {
+          }
+        });
+
+      },
+      function (xhr, ajaxOptions, thrownError) {
+        $('#userinfo').text(thrownError);
       }
-    });
+    );
   }
   $('#status').html('Đã gửi');
   setTimeout(function () {
