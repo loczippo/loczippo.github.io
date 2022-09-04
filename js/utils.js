@@ -124,11 +124,13 @@ function sendMessage() {
   //handler array
   for (let i = 0; i < arr.length; i++) {
     let newArr = arr[i].split('-');
-    newArr.pop();
+    if(newArr.length != 1) newArr.pop();
     for (let j = 0; j < newArr.length; j++) {
       listIDArray.push(newArr[j].trim());
     }
   }
+  console.log(listIDArray)
+  return;
   for (let i = 0; i < listIDArray.length; i++) {
     makeRequest(
       '/admin/userinfo',
