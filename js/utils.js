@@ -118,7 +118,7 @@ function resetDatabase() {
 
 function sendMessage() {
   var arr = $('#userid').val().split('\n');
-  var content = $('#content').val();
+  
 
   var listIDArray = [];
   //handler array
@@ -145,7 +145,8 @@ function sendMessage() {
         }
 
         data = data.userProfile;
-
+        
+        var content = $('#content').val();
         content = content.replace('@name', data.name);
 
         makeRequest('/admin/sendmessage', 'post', { id: listIDArray[i], content: content }, function (data) {
