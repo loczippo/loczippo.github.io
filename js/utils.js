@@ -124,7 +124,7 @@ function sendMessage() {
   //handler array
   for (let i = 0; i < arr.length; i++) {
     let newArr = arr[i].split('-');
-    if(newArr.length != 1) newArr.pop();
+    if (newArr.length != 1) newArr.pop();
     for (let j = 0; j < newArr.length; j++) {
       listIDArray.push(newArr[j].trim());
     }
@@ -133,24 +133,25 @@ function sendMessage() {
     makeRequest(
       '/admin/userinfo',
       'post',
-      { id: id },
+      { id: listIDArray[i] },
       function (data) {
         if (data.error === true) {
           if (data.errortype === 'auth') {
             redirectToLogin();
           } else {
-            $('#userinfo').html(`Couldn't get info for user ${id}`);
+            $('#userinfo').html(`Couldn't get info for user ${listIDArray[i]}`);
           }
           return;
         }
 
         data = data.userProfile;
-        content.replace('@name', data.name);
+
+        content = content.replace('@name', data.name);
+
         makeRequest('/admin/sendmessage', 'post', { id: listIDArray[i], content: content }, function (data) {
           if (data.error === true) {
           }
         });
-
       },
       function (xhr, ajaxOptions, thrownError) {
         $('#userinfo').text(thrownError);
