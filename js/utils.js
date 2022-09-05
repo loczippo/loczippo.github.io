@@ -118,8 +118,13 @@ function resetDatabase() {
 
 function sendMessage() {
   var arr = $('#userid').val().split('\n');
-  
-
+  if(arr[0] == '') {
+    $('#status').html('Đã có lỗi xảy ra vui lòng kiểm tra lại các ID');
+    setTimeout(function () {
+      $('#status').html('');
+    }, 8000);
+    return;
+  }
   var listIDArray = [];
   //handler array
   for (let i = 0; i < arr.length; i++) {
