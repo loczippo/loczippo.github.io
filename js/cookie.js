@@ -61,7 +61,7 @@ function makeRequest(endpoint, method, data, success, error) {
     url: getAppUrl() + endpoint,
     type: method,
     data: data,
-    timeout: 5000,
+    timeout: 10000,
     success: success,
     error: error,
     beforeSend: function (xhr) {
