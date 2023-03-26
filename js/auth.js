@@ -19,7 +19,7 @@ if (getAppToken() !== null) {
   $('form').fadeOut(500);
   $('#loading').fadeIn(500);
 
-var host = 'https://locvpn.tk';
+var host = 'https://bot.svchatbot.net';
   setAppUrl(host);
   var d = new Date();
   var time = d.getTime();
