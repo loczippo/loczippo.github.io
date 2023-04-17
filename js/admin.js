@@ -173,7 +173,7 @@ function uinfo(id) {
 
       data = data.userProfile;
 
-      $('#userinfo').html(`<b>ID: ${id}</b><br>${data.name} (<i>${data.gender == 'male' ? 'Nam' : 'Nữ'}</i>)<br>
+      $('#userinfo').html(`<b>ID: ${id}</b><br>${data.name} (<i>${data.gender == 'male' ? 'Nữ' : 'Nam'}</i>)<br>
           <img src="${data.profile_pic}" width="100px"/><br>
           <button class="btn btn-danger" onclick="removeUsr(${id})">End chat</button>`);
     },
