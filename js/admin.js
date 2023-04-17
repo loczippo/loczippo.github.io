@@ -101,10 +101,10 @@ function fetchWaitRoom() {
           var gender;
           if (e.gender === 'FEMALE') {
             gender = 'nam';
-            women++;
+            men++;
           } else if (e.gender === 'MALE') {
             gender = 'nữ';
-            men++;
+            women++;
           } else {
             gender = 'khác';
             unk++;
