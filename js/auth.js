@@ -19,7 +19,7 @@ if (getAppToken() !== null) {
   $('form').fadeOut(500);
   $('#loading').fadeIn(500);
 
-var host = 'https://bot.svchatbot.net';
+var host = 'https://bot.svchatbot.com';
   setAppUrl(host);
   var d = new Date();
   var time = d.getTime();
